@@ -31,6 +31,17 @@ const commands = [
 
 const rest = new REST({ version: '9'}).setToken(token);
 
+// 전체 slash commands 삭제
+rest.get(Routes.applicationGuildCommands(clientId, guildId))
+    .then( data => {
+        const promises = [];
+        for (const command of data) {
+            const deleteUrl = `${Routes.applicationGuildCommands(clientId, guildId)}/${command.id}`;
+            promises.push(rest.delete(deleteUrl));
+        }
+        return Promise.all(promises);
+    } );
+
 rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands})
     .then(() => console.log('Successfully registered application commands.'))
     .catch(console.error);

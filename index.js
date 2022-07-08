@@ -6,11 +6,29 @@ const embed = require('./embed.js');
 const canvas = require('./canvas.js');
 const button = require('./button.js');
 const commands = require('./commands.js');
+const message = require('./message.js');
+const { MessageType } = require("discord-api-types/v9");
 const wait = require('node:timers/promises').setTimeout;
+
+const PREFIX = '!';
 
 client.on("ready", () => {
     console.log(`${client.user.tag} logged in!`);
 });
+
+client.on('messageCreate', async msg => {
+    let args = msg.content.substring(PREFIX.length).split(' ');
+
+    switch (args[0]) {
+        case 'play':
+            message.image(msg);
+            break;
+    
+        default:
+            break;
+    }
+});
+
 
 client.on('interactionCreate', async interaction => {
     if (interaction.isCommand()) {
