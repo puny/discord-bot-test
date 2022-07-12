@@ -69,7 +69,8 @@ const button = async interaction => {
                 return new MessageButton()
                     .setCustomId(button.customId)
                     .setLabel(button.label)
-                    .setStyle(button.style);
+                    .setStyle(button.style)
+                    .setEmoji('123456789012345678');
             })
         )
 
@@ -141,10 +142,22 @@ const api = async interaction => {
     await interaction.reply({ content: '\:cheese: :cheese:', files: imglist });
 }
 
+const react = async interaction => {
+    try {
+        const message = await interaction.reply({ content: 'You can react with Unicode emojis!', fetchReply: true });
+        message.react(':)');
+        
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
 
 module.exports = {
     imgur,
     button,
     server,
-    api
+    api,
+    react
 }

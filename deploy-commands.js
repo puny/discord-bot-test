@@ -10,6 +10,7 @@ const commands = [
     new SlashCommandBuilder().setName('embed').setDescription('Replies with embed!'),
     new SlashCommandBuilder().setName('api').setDescription('Replies with api!'),
     new SlashCommandBuilder().setName('canvas').setDescription('Replies with canvas!'),
+    new SlashCommandBuilder().setName('react').setDescription('Replies with react!'),
 
     new SlashCommandBuilder().setName('server').setDescription('Replies with server info!')
         .addStringOption( option => option.setName('input').setRequired(true).setDescription('Enter a string'))        
@@ -32,6 +33,7 @@ const commands = [
 const rest = new REST({ version: '9'}).setToken(token);
 
 // 전체 slash commands 삭제
+
 rest.get(Routes.applicationGuildCommands(clientId, guildId))
     .then( data => {
         const promises = [];
